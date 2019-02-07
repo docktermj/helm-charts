@@ -14,6 +14,7 @@ fullnameOverride: ""
 
 service:
   type: NodePort
+  port: 8087
 
 ingress:
   enabled: false
