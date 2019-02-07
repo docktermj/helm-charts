@@ -33,9 +33,9 @@ spec:
           - name: "SENZING_INPUT_URL"
             value: "https://s3.amazonaws.com/public-read-access/TestDataSets/loadtest-dataset-1M.json"
           - name: "SENZING_RECORD_MAX"
-            value: 10000
+            value: "10000"
           - name: "SENZING_RECORD_MONITOR"
-            value: 100
+            value: "100"
           ports:
             - name: http
               containerPort: 80
