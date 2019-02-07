@@ -3,18 +3,18 @@ categories:
   - nginx
 questions:  
   - variable: service.type
-    description: "What type of network access"
+    label: Service type  
+    description: "Choose service type"
     type: enum  
     default: "NodePort"
     options:
       - "NodePort"
       - "ClusterIP"
       - "LoadBalancer"
-    label: Use Default Image
   - variable: service.port
-    description: "What type of network access"
+    label: Port number  
+    description: "Choose port 1..65535"
     type: int  
     default: 80
     min: 1
     max: 65535
-    label: Use Default Image Bob
