@@ -24,18 +24,18 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-          - name: "SENZING_SUBCOMMAND"
-            value: "url-to-kafka"
-          - name: "SENZING_KAFKA_BOOTSTRAP_SERVER"
-            value: "senzing-kafka:9092"
-          - name: "SENZING_KAFKA_TOPIC"
-            value: "senzing-kafka-topic"
-          - name: "SENZING_INPUT_URL"
-            value: "https://s3.amazonaws.com/public-read-access/TestDataSets/loadtest-dataset-1M.json"
-          - name: "SENZING_RECORD_MAX"
-            value: "10000"
-          - name: "SENZING_RECORD_MONITOR"
-            value: "100"
+            - name: "SENZING_SUBCOMMAND"
+              value: "url-to-kafka"
+            - name: "SENZING_KAFKA_BOOTSTRAP_SERVER"
+              value: "senzing-kafka:9092"
+            - name: "SENZING_KAFKA_TOPIC"
+              value: "senzing-kafka-topic"
+            - name: "SENZING_INPUT_URL"
+              value: "https://s3.amazonaws.com/public-read-access/TestDataSets/loadtest-dataset-1M.json"
+            - name: "SENZING_RECORD_MAX"
+              value: "10000"
+            - name: "SENZING_RECORD_MONITOR"
+              value: "100"
           ports:
             - name: http
               containerPort: 80
