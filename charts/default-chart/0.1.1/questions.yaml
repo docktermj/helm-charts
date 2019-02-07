@@ -1,6 +1,7 @@
 categories:
   - mjd
   - nginx
+questions:  
   - variable: service.type
     description: "What type of network access"
     type: enum  
