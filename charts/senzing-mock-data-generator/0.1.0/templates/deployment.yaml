@@ -27,7 +27,7 @@ spec:
             - name: "SENZING_SUBCOMMAND"
               value: "url-to-kafka"
             - name: "SENZING_KAFKA_BOOTSTRAP_SERVER"
-              value: "senzing-kafka-kafka:9092"
+              value: "my-kafka-kafka:9092"
             - name: "SENZING_KAFKA_TOPIC"
               value: "senzing-kafka-topic"
             - name: "SENZING_INPUT_URL"
