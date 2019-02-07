@@ -1,19 +1,19 @@
 categories:
-- mjd
-- nginx
-- variable: service.type
-  description: "What type of network access"
-  type: enum  
-  default: "NodePort"
-  options:
-    - "NodePort"
-    - "ClusterIP"
-    - "LoadBalancer"
-  label: Use Default Image
-- variable: service.port
-  description: "What type of network access"
-  type: int  
-  default: 80
-  min: 1
-  max: 65535
-  label: Use Default Image Bob
+  - mjd
+  - nginx
+  - variable: service.type
+    description: "What type of network access"
+    type: enum  
+    default: "NodePort"
+    options:
+      - "NodePort"
+      - "ClusterIP"
+      - "LoadBalancer"
+    label: Use Default Image
+  - variable: service.port
+    description: "What type of network access"
+    type: int  
+    default: 80
+    min: 1
+    max: 65535
+    label: Use Default Image Bob
