@@ -23,6 +23,9 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - /app/docker-entrypoint.sh
+            - /app/new-stream-loader.py          
           env:
             - name: SENZING_KAFKA_BOOTSTRAP_SERVER
               value: "my-kafka-kafka:9092"
@@ -40,12 +43,8 @@ spec:
               value: "4"
             - name: SENZING_LOG_LEVEL
               value: "debug"
-            - name: SENZING_CORE_DATABASE_URL
-              value: "db2://db2i105:db2senzing@208.43.246.116:60000/g2"
-            - name: SENZING_RES_DATABASE_URL
-              value: "db2://db2i105:db2senzing@208.43.246.115:60000/g2"
-            - name: SENZING_LIBFE_DATABASE_URL
-              value: "db2://db2i105:db2senzing@208.43.246.114:60000/g2"
+            - name: SENZING_DATABASE_URL
+              value: "mysql://g2:g2@my-mysql-mysql:3306/G2"
           ports:
             - name: http
               containerPort: 80
