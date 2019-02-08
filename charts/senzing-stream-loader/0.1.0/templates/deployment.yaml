@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "senzing-stream-loader.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "senzing-stream-loader.name" . }}
+    helm.sh/chart: {{ include "senzing-stream-loader.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "senzing-stream-loader.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "senzing-stream-loader.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: SENZING_KAFKA_BOOTSTRAP_SERVER
+              value: "my-kafka-kafka:9092"
+            - name: SENZING_SUBCOMMAND
+              value: "kafka"
+            - name: SENZING_KAFKA_TOPIC
+              value: "senzing-kafka-topic"
+            - name: SENZING_DATA_SOURCE
+              value: "PEOPLE"
+            - name: SENZING_ENTITY_TYPE
+              value: "PEOPLE"
+            - name: SENZING_MONITORING_PERIOD
+              value: "60"
+            - name: SENZING_THREADS_PER_PROCESS
+              value: "4"
+            - name: SENZING_LOG_LEVEL
+              value: "debug"
+            - name: SENZING_CORE_DATABASE_URL
+              value: "db2://db2i105:db2senzing@208.43.246.116:60000/g2"
+            - name: SENZING_RES_DATABASE_URL
+              value: "db2://db2i105:db2senzing@208.43.246.115:60000/g2"
+            - name: SENZING_LIBFE_DATABASE_URL
+              value: "db2://db2i105:db2senzing@208.43.246.114:60000/g2"
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
