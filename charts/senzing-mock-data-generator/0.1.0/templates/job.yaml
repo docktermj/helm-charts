@@ -2,21 +2,8 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ include "senzing-mock-data-generator.fullname" . }}
-  labels:
-    app.kubernetes.io/name: {{ include "senzing-mock-data-generator.name" . }}
-    helm.sh/chart: {{ include "senzing-mock-data-generator.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: {{ include "senzing-mock-data-generator.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
   template:
-    metadata:
-      labels:
-        app.kubernetes.io/name: {{ include "senzing-mock-data-generator.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       restartPolicy: Never
       containers:
@@ -36,17 +23,3 @@ spec:
               value: "{{ .Values.senzing.recordMax }}"
             - name: "SENZING_RECORD_MONITOR"
               value: "{{ .Values.senzing.recordMonitor }}"
-          ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
