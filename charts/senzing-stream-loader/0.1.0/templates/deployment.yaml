@@ -19,13 +19,20 @@ spec:
         app.kubernetes.io/name: {{ include "senzing-stream-loader.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: data    
+      volumes:
+        - name: opt-senzing
+          hostPath:
+            path: /opt/senzing
+            type: Directory    
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
-            - mountPath: /opt/senzing
-              name: opt-senzing          
+            - name: opt-senzing
+              mountPath: /opt/senzing
           command:
             - /app/docker-entrypoint.sh
             - /app/stream-loader.py          
@@ -74,8 +81,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-      volumes:
-        - name: opt-senzing
-          hostPath:
-            path: /opt/senzing
-            type: Directory
+
