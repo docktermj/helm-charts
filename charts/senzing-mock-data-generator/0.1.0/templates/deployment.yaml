@@ -19,6 +19,7 @@ spec:
         app.kubernetes.io/name: {{ include "senzing-mock-data-generator.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      restartPolicy: Never    
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -51,7 +52,6 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
-      restartPolicy: OnFailure
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
