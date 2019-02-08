@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Job
+kind: Deployment
 metadata:
   name: {{ include "senzing-mock-data-generator.fullname" . }}
   labels:
@@ -51,7 +51,7 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
-      restartPolicy: Never
+      restartPolicy: OnFailure
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
