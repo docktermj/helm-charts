@@ -1,5 +1,7 @@
 # phpMyAdmin
 
+**NOTE:** Original version: [https://github.com/bitnami/charts/tree/master/upstreamed/phpmyadmin](https://github.com/bitnami/charts/tree/master/upstreamed/phpmyadmin)
+
 [phpMyAdmin](https://www.phpmyadmin.net/) is a free and open source administration tool for MySQL and MariaDB. As a portable web application written primarily in PHP, it has become one of the most popular MySQL administration tools, especially for web hosting services.
 
 ## TL;DR
