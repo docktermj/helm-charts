@@ -1,5 +1,6 @@
 categories:
   - mySql
+  - Senzing
 questions:
 
   - variable: image.repository
@@ -52,6 +53,6 @@ questions:
 
   - variable: senzing.recordMonitor
     label: Write a log record after processing N records.
-    description: "Example: 100"
+    description: "Example: 1000"
     type: int
-    default: 100
+    default: 1000
