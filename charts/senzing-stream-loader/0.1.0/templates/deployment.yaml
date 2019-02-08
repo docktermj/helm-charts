@@ -24,8 +24,8 @@ spec:
       volumes:
         - name: opt-senzing
           hostPath:
-            path: /tmp/bob
-            type: DirectoryOrCreate    
+            path: /opt/senzing
+            type: DirectoryOrCreate
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
