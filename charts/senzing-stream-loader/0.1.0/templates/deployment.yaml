@@ -25,7 +25,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command:
             - /app/docker-entrypoint.sh
-            - /app/new-stream-loader.py          
+            - /app/stream-loader.py          
           env:
             - name: SENZING_KAFKA_BOOTSTRAP_SERVER
               value: "my-kafka-kafka:9092"
